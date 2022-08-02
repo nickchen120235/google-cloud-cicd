@@ -30,7 +30,7 @@ jobs:
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         description: "GitHub Action CI/CD test"
 
-    - id: deploy
+    - id: deploy2
       name: Deploy second to Google Cloud Functions
       uses: google-github-actions/deploy-cloud-functions@v0
       with:
