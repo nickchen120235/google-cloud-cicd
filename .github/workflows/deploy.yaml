@@ -30,6 +30,18 @@ jobs:
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         description: "GitHub Action CI/CD test"
 
+    - id: deploy
+      name: Deploy second to Google Cloud Functions
+      uses: google-github-actions/deploy-cloud-functions@v0
+      with:
+        name: hello-github-cicd-2
+        runtime: nodejs16
+        entry_point: main
+        region: asia-east1
+        source_dir: src/second
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        description: "GitHub Action CI/CD test 2"
+
     - id: test
       name: Deployment Test
       run: 'curl "${{ steps.deploy.outputs.url }}"'

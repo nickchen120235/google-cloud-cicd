@@ -1,0 +1,1 @@
+exports.main = (req, res) => res.send('This is the second function!')
