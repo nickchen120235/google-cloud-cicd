@@ -24,7 +24,7 @@ jobs:
       with:
         name: hello-github-cicd
         runtime: nodejs16
-        region: east-asia1
+        region: asia-east1
         source_dir: src/
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         description: "GitHub Action CI/CD test"
