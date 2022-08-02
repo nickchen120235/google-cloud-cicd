@@ -1,0 +1,22 @@
+{
+  "name": "gcp-cicd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nickchen120235/google-cloud-cicd.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nickchen120235/google-cloud-cicd/issues"
+  },
+  "homepage": "https://github.com/nickchen120235/google-cloud-cicd#readme",
+  "devDependencies": {
+    "@google-cloud/functions-framework": "^3.1.2"
+  }
+}
