@@ -3,11 +3,35 @@ on:
     branches: [master]
 
 jobs:
+  check-diff:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    outputs:
+      hello: ${{ steps.check-hello.outputs.modified }}
+      hello2: ${{ steps.check-hello2.outputs.modified }}
+
+    steps:
+      - id: hello
+        name: Check whether hello has changed
+        uses: mudlabs/simple-diff@v1.2.0
+        with:
+          path: src/first
+
+      - id: hello2
+        name: Check whether hello2 has changed
+        uses: mudlabs/simple-diff@v1.2.0
+        with:
+          path: src/second
+
   deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
+    needs: check-diff
 
     steps:
     - uses: actions/checkout@v3
@@ -19,6 +43,7 @@ jobs:
         credentials_json: ${{ secrets.GCP_SA_JSON }}
 
     - id: deploy
+      if: ${{ needs.check-diff.outputs.hello == true }}
       name: Deploy to Google Cloud Functions
       uses: google-github-actions/deploy-cloud-functions@v0
       with:
@@ -26,11 +51,12 @@ jobs:
         runtime: nodejs16
         entry_point: main
         region: asia-east1
-        source_dir: src/
+        source_dir: src/first
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         description: "GitHub Action CI/CD test"
 
     - id: deploy2
+      if: ${{ needs.check-diff.outputs.hello2 == true }}
       name: Deploy second to Google Cloud Functions
       uses: google-github-actions/deploy-cloud-functions@v0
       with:
