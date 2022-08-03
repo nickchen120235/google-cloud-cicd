@@ -20,14 +20,14 @@ jobs:
         name: Check whether hello has changed
         uses: mudlabs/simple-diff@v1.2.0
         with:
-          path: src/first
+          path: src/first/**
           strict: false
 
       - id: hello2
         name: Check whether hello2 has changed
         uses: mudlabs/simple-diff@v1.2.0
         with:
-          path: src/second
+          path: src/second/**
           strict: false
 
   deploy:
@@ -71,7 +71,3 @@ jobs:
         source_dir: src/second
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         description: "GitHub Action CI/CD test 2"
-
-    - id: test
-      name: Deployment Test
-      run: 'curl "${{ steps.deploy.outputs.url }}"'
