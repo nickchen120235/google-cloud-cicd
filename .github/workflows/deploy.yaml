@@ -15,20 +15,30 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
 
       - id: hello
         name: Check whether hello has changed
-        uses: mudlabs/simple-diff@v1.2.0
-        with:
-          path: src/first/**
-          strict: false
+        shell: pwsh
+        run: |
+          $diff = git diff --name-only HEAD^ HEAD
+
+          $SourceDiff = $diff | Where-Object { $_ -match 'src/first' }
+          $HasDiff = $SourceDiff.Length -gt 0
+
+          Write-Host "::set-output name=modified::$HasDiff"
 
       - id: hello2
         name: Check whether hello2 has changed
-        uses: mudlabs/simple-diff@v1.2.0
-        with:
-          path: src/second/**
-          strict: false
+        shell: pwsh
+        run: |
+          $diff = git diff --name-only HEAD^ HEAD
+
+          $SourceDiff = $diff | Where-Object { $_ -match 'src/second' }
+          $HasDiff = $SourceDiff.Length -gt 0
+
+          Write-Host "::set-output name=modified::$HasDiff"
 
   deploy:
     runs-on: ubuntu-latest
