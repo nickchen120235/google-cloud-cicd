@@ -57,7 +57,7 @@ jobs:
         credentials_json: ${{ secrets.GCP_SA_JSON }}
 
     - id: deploy
-      if: ${{ needs.check-diff.outputs.hello == true }}
+      if: ${{ needs.check-diff.outputs.hello == 'True' }}
       name: Deploy to Google Cloud Functions
       uses: google-github-actions/deploy-cloud-functions@v0
       with:
@@ -70,7 +70,7 @@ jobs:
         description: "GitHub Action CI/CD test"
 
     - id: deploy2
-      if: ${{ needs.check-diff.outputs.hello2 == true }}
+      if: ${{ needs.check-diff.outputs.hello2 == 'True' }}
       name: Deploy second to Google Cloud Functions
       uses: google-github-actions/deploy-cloud-functions@v0
       with:
