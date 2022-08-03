@@ -21,12 +21,14 @@ jobs:
         uses: mudlabs/simple-diff@v1.2.0
         with:
           path: src/first
+          strict: false
 
       - id: hello2
         name: Check whether hello2 has changed
         uses: mudlabs/simple-diff@v1.2.0
         with:
           path: src/second
+          strict: false
 
   deploy:
     runs-on: ubuntu-latest
