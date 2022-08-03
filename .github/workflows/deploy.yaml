@@ -64,7 +64,7 @@ jobs:
         name: hello-github-cicd
         runtime: nodejs16
         entry_point: main
-        region: asia-east1
+        region: us-west1
         source_dir: src/first
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         description: "GitHub Action CI/CD test"
@@ -77,7 +77,7 @@ jobs:
         name: hello-github-cicd-2
         runtime: nodejs16
         entry_point: main
-        region: asia-east1
+        region: us-west1
         source_dir: src/second
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         description: "GitHub Action CI/CD test 2"
